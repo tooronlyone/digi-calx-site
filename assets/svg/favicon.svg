@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Digi_CalX">
+  <rect width="64" height="64" fill="#fff"/>
+  <rect x="4" y="4" width="56" height="56" fill="none" stroke="#000" stroke-width="3"/>
+  <circle cx="32" cy="32" r="17" fill="none" stroke="#000" stroke-width="2"/>
+  <path d="M32 9v12M32 43v12M9 32h12M43 32h12" stroke="#000" stroke-width="2"/>
+  <text x="32" y="37" text-anchor="middle" font-family="monospace" font-weight="700" font-size="13" fill="#000">CX</text>
+</svg>

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://digi-calx.d-hag.com/sitemap.xml

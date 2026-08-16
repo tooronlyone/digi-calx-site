@@ -1,0 +1,4 @@
+wrangler*.jsonc
+README_DEPLOY.md
+.assetsignore
+.wrangler/

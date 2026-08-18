@@ -44,12 +44,9 @@ img, svg { max-width: 100%; }
   background: rgba(255,255,255,.95);
   backdrop-filter: blur(12px);
 }
-.brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; width: max-content; }
-.brand-mark { width: 62px; height: 42px; border: 1px solid #000; display: grid; place-items: center; position: relative; overflow: hidden; }
-.brand-mark::before, .brand-mark::after { content: ""; position: absolute; background: #000; }
-.brand-mark::before { width: 1px; height: 100%; left: 50%; top: 0; opacity: .18; }
-.brand-mark::after { height: 1px; width: 100%; top: 50%; left: 0; opacity: .18; }
-.brand-mark span { font: 700 15px/1 Space Mono, monospace; letter-spacing: -1px; }
+.brand { display: inline-flex; align-items: center; gap: 6px; text-decoration: none; width: max-content; max-width: 100%; }
+.brand-mark { width: 100px; min-width: 100px; height: auto; display: inline-flex; align-items: center; justify-content: center; position: relative; flex-shrink: 0; }
+.brand-mark img { display: block; width: 90px; max-width: none; height: auto; object-fit: contain; }
 .brand-copy { display: grid; line-height: 1.15; }
 .brand-copy strong { font: 400 24px/1 Bebas Neue, sans-serif; letter-spacing: 2px; text-transform: none; }
 .brand-copy small { color: var(--muted); font: 500 9px/1.3 Space Mono, monospace; text-transform: uppercase; letter-spacing: 1.2px; margin-top: 4px; }
@@ -242,7 +239,8 @@ img, svg { max-width: 100%; }
   .site-nav { top: 71px; }
   .brand-copy strong { font-size: 20px; }
   .brand-copy small { display: none; }
-  .brand-mark { width: 52px; height: 36px; }
+  .brand-mark { width: 76px; min-width: 76px; }
+  .brand-mark img { width: 68px; max-width: none; }
   .hero { padding-top: 52px; }
   .hero h1 { font-size: clamp(56px, 17vw, 82px); }
   .network-map { min-height: 590px; }

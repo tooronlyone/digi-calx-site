@@ -15,21 +15,39 @@ logo = Image.open(src).convert('RGBA')
 w, h = logo.size
 
 for size in sizes:
-    # create a solid white square background and center the logo inside it
-    canvas = Image.new('RGBA', (size, size), (255, 255, 255, 255))
-    # leave a small padding to avoid touching edges
+    # create a transparent canvas
+    canvas = Image.new('RGBA', (size, size), (255, 255, 255, 0))
+    draw = Image.new('RGBA', (size, size), (255, 255, 255, 0))
+    from PIL import ImageDraw
+
+    # determine rounded rectangle parameters
     pad_ratio = 0.82
-    scale = min((size * pad_ratio) / w, (size * pad_ratio) / h)
+    inner_size = int(size * pad_ratio)
+    # center the inner white rounded square
+    inner_offset = ((size - inner_size) // 2, (size - inner_size) // 2)
+    radius = max(1, int(size * 0.16))
+
+    d = ImageDraw.Draw(draw)
+    left = inner_offset[0]
+    top = inner_offset[1]
+    right = left + inner_size
+    bottom = top + inner_size
+    # draw white rounded rectangle onto the transparent draw layer
+    d.rounded_rectangle([left, top, right, bottom], radius=radius, fill=(255, 255, 255, 255))
+
+    # calculate logo scale to fit inside the rounded square with a bit of padding
+    scale = min((inner_size * 0.92) / w, (inner_size * 0.92) / h)
     new_w = max(1, int(w * scale))
     new_h = max(1, int(h * scale))
     resized = logo.resize((new_w, new_h), Image.LANCZOS)
-    offset = ((size - new_w) // 2, (size - new_h) // 2)
-    # paste using the alpha channel as mask to preserve logo shape on white
+    offset = (left + (inner_size - new_w) // 2, top + (inner_size - new_h) // 2)
+
+    # composite the white rounded background and then paste the logo using its alpha
+    canvas = Image.alpha_composite(canvas, draw)
     canvas.paste(resized, offset, resized.split()[-1])
-    # convert to RGB to flatten any alpha onto white background
-    final = canvas.convert('RGB')
+
     out_path = out_dir / f'favicon-{size}.png'
-    final.save(out_path, optimize=True)
+    canvas.save(out_path, optimize=True)
     print('Wrote', out_path)
 
 # Save the commonly used names
@@ -43,8 +61,7 @@ shutil.copyfile(out_dir / 'favicon-180.png', out_dir / 'apple-touch-icon.png')
 # Create favicon.ico in site root containing multiple sizes
 ico_sizes = [(16,16),(32,32),(48,48),(64,64)]
 base = Image.open(out_dir / 'favicon-512.png').convert('RGBA')
-# ensure ICO is created from an image with white background
-base_rgb = base.convert('RGB')
+# create ICO from the RGBA image so transparency outside rounded corners is preserved
 ico_path = root / 'favicon.ico'
-base_rgb.save(ico_path, format='ICO', sizes=ico_sizes)
+base.save(ico_path, format='ICO', sizes=ico_sizes)
 print('Wrote', ico_path)

@@ -5,14 +5,14 @@ Production URL: https://digi-calx.d-hag.com/
 ## Contents
 
 - `index.html` — homepage and SEO metadata
-- `styles.css` — monochrome D-HAG/Digi_TransX visual family
+- `styles.css` — Digi_CalX navy, blue and signal-orange visual system
 - `script.js` — navigation + reveal behavior
 - `robots.txt` — crawler access + sitemap reference
 - `sitemap.xml` — canonical public URL
 - `404.html` — branded noindex 404
 - `site.webmanifest` — basic web manifest
 - `assets/png/digi-calx-social-card.png` — Open Graph/Twitter card
-- `assets/svg/favicon.svg` — favicon
+- `digi-calx-logo.png` — primary logo and favicon
 - `wrangler.jsonc` — Cloudflare Workers Static Assets config
 
 ## Cloudflare Workers Static Assets
